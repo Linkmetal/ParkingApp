@@ -1,0 +1,29 @@
+<section text-center margin-vertical>
+    <img src="assets/img/logo.jpg" />
+    <ion-title s>PARKING APP</ion-title>
+</section>
+
+<ion-content>
+
+  <div class="content">
+    <form (submit)="login($event)"  #form>
+      <ion-item lines="none">
+        <ion-icon name="person" margin-end></ion-icon>
+        <ion-input type="text" name="username" [(ngModel)]="user.username" placeholder="username">
+        </ion-input>
+      </ion-item>
+      <ion-item lines="none">
+        <ion-icon name="key" margin-end></ion-icon>
+        <ion-input type="password" name="password" [(ngModel)]="user.password" placeholder="password">
+        </ion-input>
+      </ion-item>
+      <!-- <ion-item lines="none" >
+        <ion-label text-capitalize translate>remember</ion-label>
+        <ion-checkbox [(ngModel)]="remember" name="remember"></ion-checkbox>
+      </ion-item> -->
+      <div class="buttons">
+        <ion-button (click)="login()" size="full" margin-top translate>Login</ion-button>
+      </div>
+    </form>
+  </div>
+</ion-content>
