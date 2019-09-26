@@ -5,18 +5,15 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { LoginPage } from './login.page';
-
-
-import { HttpClientModule } from '@angular/common/http';
-
-import { FormlyIonicModule } from '@ngx-formly/ionic';
+import { RegisterPage } from './register.page';
 
 import { FormlyModule } from '@ngx-formly/core';
+import { FormlyIonicModule } from '@ngx-formly/ionic';
+
 const routes: Routes = [
   {
     path: '',
-    component: LoginPage
+    component: RegisterPage
   }
 ];
 
@@ -29,8 +26,7 @@ const routes: Routes = [
     ReactiveFormsModule,
     FormlyModule,
     FormlyIonicModule,
-    HttpClientModule
   ],
-  declarations: [LoginPage]
+  declarations: [RegisterPage]
 })
-export class LoginPageModule {}
+export class RegisterPageModule {}

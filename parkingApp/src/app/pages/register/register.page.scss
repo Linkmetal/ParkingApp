@@ -1,4 +1,4 @@
- @import "../../../theme/variables.scss";
+@import "../../../theme/variables.scss";
 
 
 .content{
@@ -16,15 +16,6 @@
 
 form, ion-button {
   width: 100%;
-//   @media (min-width: $ion-breakpoint-sm) {
-//     ion-button{
-//       width: 50%;
-//     }
-//     width: 75%;
-//   }
-//   @media (min-width: $ion-breakpoint-xl) {
-//     width: 50%;
-//   }
 }
 
 ion-input {
