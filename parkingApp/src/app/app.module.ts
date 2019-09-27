@@ -17,6 +17,8 @@ import { ObjectTypeComponent } from './typings/formly/object.type';
 import { FormlyFieldFile } from './typings/formly/file.type';
 import { FileValueAccessor } from './typings/formly/file-value-accessor';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { Geolocation } from '@ionic-native/geolocation/ngx';
+import { BluetoothLE } from '@ionic-native/bluetooth-le/ngx';
 
 @NgModule({
   declarations: [
@@ -69,7 +71,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     LoginService,
-    HttpInterceptorService
+    // HttpInterceptorService,
+    Geolocation,
+    BluetoothLE
   ],
   bootstrap: [AppComponent]
 })

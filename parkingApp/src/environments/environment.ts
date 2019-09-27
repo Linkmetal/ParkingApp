@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  domain: 'http://localhost:3000',
+  server: 'http://localhost:3000/api',
   apiKey: '',
 };
 

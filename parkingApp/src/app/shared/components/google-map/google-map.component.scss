@@ -1,0 +1,15 @@
+#map_canvas {
+    height: 60%;
+}
+
+.buttons {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-around;
+  padding: 10px;
+}
+
+.loadingBar {
+  position: relative;
+  top: 31vh;
+}
