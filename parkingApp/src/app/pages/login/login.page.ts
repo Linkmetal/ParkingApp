@@ -51,7 +51,7 @@ export class LoginPage implements OnInit {
       if(res.token) {
         this.router.navigateByUrl('/home')
       }
-    }) 
+    }, (err) => console.log(err)) 
   };
 
 
