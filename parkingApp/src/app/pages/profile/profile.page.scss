@@ -1,0 +1,11 @@
+
+.buttons {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-around;
+    padding: 10px;
+  }
+  
+  form, ion-button {
+    width: 100%;
+  }

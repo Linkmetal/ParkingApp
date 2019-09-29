@@ -4,7 +4,7 @@ export interface BasicUser {
 }
 
   
-export interface User{
+export interface User {
     username: string;
     password: string;
     userId?: number; // C# server ID

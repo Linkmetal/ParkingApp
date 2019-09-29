@@ -19,6 +19,8 @@ import { FileValueAccessor } from './typings/formly/file-value-accessor';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { BluetoothLE } from '@ionic-native/bluetooth-le/ngx';
+import { NativeStorage } from '@ionic-native/native-storage/ngx';
+
 
 @NgModule({
   declarations: [
@@ -64,7 +66,7 @@ import { BluetoothLE } from '@ionic-native/bluetooth-le/ngx';
       ],
     }),
     FormlyIonicModule,
-    HttpClientModule  
+    HttpClientModule
   ],
   providers: [
     StatusBar,
@@ -73,7 +75,8 @@ import { BluetoothLE } from '@ionic-native/bluetooth-le/ngx';
     LoginService,
     // HttpInterceptorService,
     Geolocation,
-    BluetoothLE
+    BluetoothLE,
+    NativeStorage
   ],
   bootstrap: [AppComponent]
 })

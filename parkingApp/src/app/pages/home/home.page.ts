@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BluetoothLE } from '@ionic-native/bluetooth-le/ngx';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -8,7 +9,7 @@ import { BluetoothLE } from '@ionic-native/bluetooth-le/ngx';
 })
 export class HomePage implements OnInit{
 
-  constructor(private ble: BluetoothLE) {}
+  constructor(private ble: BluetoothLE, private router:Router) {}
 
 
   ngOnInit(): void {
@@ -32,6 +33,9 @@ export class HomePage implements OnInit{
     //   }, (err) => console.log(err));
 
     // });
+  }
 
+  goToProfile() {
+    this.router.navigateByUrl('/profile')
   }
 }

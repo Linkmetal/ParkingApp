@@ -8,6 +8,9 @@ import { HttpClient } from '@angular/common/http';
 import { tap } from 'rxjs/operators'
 import { LoginService } from './../../services/login.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { NativeStorage } from '@ionic-native/native-storage/ngx';
+import { ProfileService } from 'src/app/services/profile.service';
+import { ToastService } from 'src/app/services/toast.service';
 
 
 
@@ -33,9 +36,12 @@ export class LoginPage implements OnInit {
     private loginService: LoginService,
     private formlyJsonschema: FormlyJsonschema,
     private http: HttpClient,
-    private router: Router
+    private router: Router,
+    private nativeStorage: NativeStorage,
+    private profileService: ProfileService,
+    private toastService: ToastService
     ) { 
-      this.loadExample('login.schema'); 
+      this.loadForm('login.schema'); 
     }
 
   
@@ -49,13 +55,24 @@ export class LoginPage implements OnInit {
     this.loginService.login(model).subscribe( (res) => {
       console.log(res);
       if(res.token) {
-        this.router.navigateByUrl('/home')
+        this.nativeStorage.setItem("user", model);
+        this.loginService.user = model;
+        this.nativeStorage.setItem("token", res.token);
+        this.profileService.get(this.loginService.user.username).subscribe( (res) => {
+          this.profileService.profile = res[0];
+          console.log(res);
+          this.router.navigateByUrl('/home')
+        }, (err) => {
+          this.toastService.create("Invalid credentials");
+        });
       }
-    }, (err) => console.log(err)) 
+    }, (err) => {
+      this.toastService.create("Invalid credentials");
+    }) 
   };
 
 
-  loadExample(type: string) {
+  loadForm(type: string) {
     this.http.get<any>(`assets/schemas/${type}.json`).pipe(
       tap(({ schema, model }) => {
         this.form = new FormGroup({});
@@ -63,7 +80,7 @@ export class LoginPage implements OnInit {
         console.log(schema)
         this.fields = [this.formlyJsonschema.toFieldConfig(schema)];
         console.log(this.fields)
-        this.fields[0].fieldGroup[1].templateOptions.type = 'password'
+        this.fields[0].fieldGroup[1].templateOptions.type = 'password';
         this.model = model;
       }),
     ).subscribe();

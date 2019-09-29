@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Your profile</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="content">
+    <form [formGroup]="formlyObj.form" (ngSubmit)="update(formlyObj.model)" *ngIf="formlyObj.fields">
+      <formly-form [form]="formlyObj.form" [fields]="formlyObj.fields" [model]="formlyObj.model"></formly-form>
+      <div class="buttons">
+        <ion-button type="submit" color="primary" size="large" margin-top translate>Update</ion-button>
+      </div>   
+    </form>
+  </div>
+</ion-content>

@@ -86,8 +86,10 @@ Setting routes
 ---------------------------------------------------- */
 
 var users = require('./routes/user.route');
+var locations = require('./routes/location.route');
 
 app.use('/api/users', users);
+app.use('/api/locations', locations);
 
 
 /** ---------------------------------------------------

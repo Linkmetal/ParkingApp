@@ -24,7 +24,8 @@ async function login(req, res) {
   
   // Save the new model instance, passing a callback
   userModel.findOne({"username": req.body.username}, await function (err, result) {
-    if (err) return res.status(403).send(`Invalid credentials ${err}`);
+    if (err) return res.status(500).send(`Internal server error ${err}`);
+    if(!result) return res.status(403).send(`Invalid credentials ${err}`);
 
     if (bcrypt.compareSync(req.body.password, result.password)) {
       const token = jwt.sign({ sub: result._uid }, config.secret);
