@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { FormlyFormOptions, FormlyFieldConfig } from '@ngx-formly/core';
 import { User } from 'src/app/typings/user';
 import { LoginService } from './../../services/login.service';
 import { FormlyService } from './../../services/formly.service';
@@ -37,7 +36,6 @@ export class RegisterPage implements OnInit {
         this.formlyObj.fields = [this.formlyJsonschema.toFieldConfig(schema)];
         this.formlyObj.fields[0].fieldGroup[1].templateOptions.type = 'password'
         this.formlyObj.model = model;
-        
       })).subscribe();
   }
 

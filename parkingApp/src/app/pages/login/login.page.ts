@@ -58,13 +58,15 @@ export class LoginPage implements OnInit {
         this.nativeStorage.setItem("user", model);
         this.loginService.user = model;
         this.nativeStorage.setItem("token", res.token);
-        this.profileService.get(this.loginService.user.username).subscribe( (res) => {
-          this.profileService.profile = res[0];
-          console.log(res);
-          this.router.navigateByUrl('/home')
-        }, (err) => {
-          this.toastService.create("Invalid credentials");
-        });
+        // this.profileService.get(this.loginService.user.username).subscribe( (res) => {
+        //   this.profileService.profile = res[0];
+        //   console.log(res);
+        //   this.router.navigateByUrl('/home')
+        // }, (err) => {
+        //   this.toastService.create("Invalid credentials");
+        // });
+        this.router.navigateByUrl('/home');
+
       }
     }, (err) => {
       this.toastService.create("Invalid credentials");
