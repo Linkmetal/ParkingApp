@@ -1,0 +1,23 @@
+@import "../../../theme/variables.scss";
+
+
+.content{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.buttons {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-around;
+  padding: 10px;
+}
+
+form, ion-button {
+  width: 100%;
+}
+
+ion-input {
+  border-bottom: 1px solid var(--ion-color-medium);
+}

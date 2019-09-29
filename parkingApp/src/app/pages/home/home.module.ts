@@ -5,7 +5,8 @@ import { IonicModule } from '@ionic/angular';
 import { RouterModule } from '@angular/router';
 
 import { HomePage } from './home.page';
-
+import { GoogleMapComponent } from 'src/app/shared/components/google-map/google-map.component';
+import { GoogleMaps } from '@ionic-native/google-maps'
 @NgModule({
   imports: [
     CommonModule,
@@ -17,7 +18,9 @@ import { HomePage } from './home.page';
         component: HomePage
       }
     ])
+    
   ],
-  declarations: [HomePage]
+  declarations: [HomePage, GoogleMapComponent],
+  providers: [GoogleMaps]
 })
 export class HomePageModule {}

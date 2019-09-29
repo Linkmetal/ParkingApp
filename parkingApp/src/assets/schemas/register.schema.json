@@ -1,0 +1,65 @@
+{
+    "schema": {
+        "type": "object",
+        "required": [
+            "username",
+            "password",
+            "name",
+            "surename",
+            "email",
+            "phone",
+            "model",
+            "licensePlate"
+        ],
+        "properties": {
+            "username": {
+                "type": "string",
+                "title": "Username"
+            },
+            "password": {
+                "type": "string",
+                "title": "Password"
+            },
+            "name": {
+                "type": "string",
+                "title": "Name"
+            },
+            "surename": {
+                "type": "string",
+                "title": "Surename"
+            },
+            "email": {
+                "type": "string",
+                "title": "Email"
+            },
+            "phone": {
+                "type": "string",
+                "title": "Phone number"
+            },
+            "model": {
+                "type": "string",
+                "title": "Car model"
+            },
+            "licensePlate": {
+                "type": "string",
+                "title": "License Plate"
+            },
+            "image": {
+                "type": "file",
+                "title": "Profile picture"
+            }
+            
+        }
+    },
+    "model": {
+        "username": "",
+        "password": "",
+        "name": "",
+        "surename": "",
+        "email": "",
+        "phone": "",
+        "model": "",
+        "licensePlate": "",
+        "image": ""
+    }
+}
