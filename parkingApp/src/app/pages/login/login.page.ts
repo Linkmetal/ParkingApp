@@ -26,12 +26,12 @@ export class LoginPage implements OnInit {
     username: null,
     password: null
   };
-
+  remember = true;
   form: FormGroup;
   model: any;
   options: FormlyFormOptions;
   fields: FormlyFieldConfig[];
-  
+
   constructor(
     private loginService: LoginService,
     private formlyJsonschema: FormlyJsonschema,
@@ -40,37 +40,38 @@ export class LoginPage implements OnInit {
     private nativeStorage: NativeStorage,
     private profileService: ProfileService,
     private toastService: ToastService
-    ) { 
-      this.loadForm('login.schema'); 
-    }
+    ) { }
 
-  
-  
-  ngOnInit() {
+    ngOnInit() {
+      this.nativeStorage.getItem('user').then( (res) => {
+        this.user = res;
+        this.loadForm('login.schema');
+      }, (err) => {
+        console.log(err);
+        this.loadForm('login.schema');
+      });
   }
-  
-  
+
+
   login(model: BasicUser){
     console.log(model);
-    this.loginService.login(model).subscribe( (res) => {
+    this.loginService.login(model).subscribe( async (res) => {
       console.log(res);
       if(res.token) {
-        this.nativeStorage.setItem("user", model);
+        if(this.remember === true) {
+          await this.nativeStorage.setItem('user', model);
+          await this.nativeStorage.setItem('token', res.token);
+        }
         this.loginService.user = model;
-        this.nativeStorage.setItem("token", res.token);
-        // this.profileService.get(this.loginService.user.username).subscribe( (res) => {
-        //   this.profileService.profile = res[0];
-        //   console.log(res);
-        //   this.router.navigateByUrl('/home')
-        // }, (err) => {
-        //   this.toastService.create("Invalid credentials");
-        // });
-        this.router.navigateByUrl('/home');
+        
+          this.router.navigateByUrl('/home')
+        
+        // this.router.navigateByUrl('/home');
 
       }
     }, (err) => {
-      this.toastService.create("Invalid credentials");
-    }) 
+      this.toastService.create(`Error logging in: ${err.message}`);
+    });
   };
 
 
@@ -79,11 +80,14 @@ export class LoginPage implements OnInit {
       tap(({ schema, model }) => {
         this.form = new FormGroup({});
         this.options = {};
-        console.log(schema)
         this.fields = [this.formlyJsonschema.toFieldConfig(schema)];
-        console.log(this.fields)
         this.fields[0].fieldGroup[1].templateOptions.type = 'password';
-        this.model = model;
+        if(this.user.username !== null) {
+          this.model = this.user;
+        }
+        else {
+          this.model = model;
+        }
       }),
     ).subscribe();
   }

@@ -1,6 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { BluetoothLE } from '@ionic-native/bluetooth-le/ngx';
 import { Router } from '@angular/router';
+import { ProfileService } from 'src/app/services/profile.service';
+import { User } from 'src/app/typings/user';
+import { ParkingLocation } from 'src/app/typings/location';
+import { NativeStorage } from '@ionic-native/native-storage/ngx';
+import { ToastService } from 'src/app/services/toast.service';
+import { LoginService } from 'src/app/services/login.service';
 
 @Component({
   selector: 'app-home',
@@ -9,33 +15,43 @@ import { Router } from '@angular/router';
 })
 export class HomePage implements OnInit{
 
-  constructor(private ble: BluetoothLE, private router:Router) {}
+  constructor(private router:Router, private profileService: ProfileService, private nativeStorage: NativeStorage, private toastService: ToastService) {}
 
+  profile: User;
+  actualLocation: ParkingLocation;
+  username: string;
+  loading = true;
+  parkedAt: string;
 
   ngOnInit(): void {
-    // INTENTO DE REGISTRAR COORDENADAS AL SALIR DEL COCHE
-    // this.ble.initialize().subscribe( (res) => {
-    //   this.ble.getAdapterInfo().then((res) => {
-    //     console.log(res)
-    //     if(res.isScanning === false) {
-    //       // this.ble.startScan(null).subscribe( (res) => {
-    //       //   console.log(res);
-    //       //   // this.ble.stopScan().then( (res) => {
-    //       //   //   console.log(res);
-    //       //   // });
-    //       // })
-    //     }
-    //     else {
-    //       this.ble.stopScan().then( (res) => {
-    //         console.log(res);
-    //       });
-    //     }
-    //   }, (err) => console.log(err));
-
-    // });
+    this.nativeStorage.getItem("user").then( res => this.username = res.username)
+    this.profileService.get(this.username).subscribe( (res) => {
+      this.profileService.profile = res[0];
+      console.log(res);
+      this.profile = this.profileService.profile;
+      this.nativeStorage.getItem('location').then(res => this.actualLocation = res);
+      console.log(this.actualLocation);
+      if(this.actualLocation !== undefined) {
+        this.parkedAt = new Date(this.actualLocation.timestamp.in).toLocaleString();
+      }
+      this.loading = false;
+    }, (err) => {
+      this.toastService.create(`Error getting profile info: ${err.message}`);
+    });
   }
 
   goToProfile() {
-    this.router.navigateByUrl('/profile')
+    this.router.navigateByUrl('/profile');
+  }
+
+  refreshLocation(e: ParkingLocation) {
+    this.actualLocation = e;
+    console.log(this.actualLocation);
+    if(e !== null) {
+      this.parkedAt = new Date(this.actualLocation.timestamp.in).toLocaleString();
+    }
+    else {
+      this.parkedAt = '';
+    }
   }
 }

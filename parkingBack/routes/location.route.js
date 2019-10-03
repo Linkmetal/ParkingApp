@@ -9,6 +9,6 @@ Methods
 ---------------------------------------------------- */
 router.post('/list', LocationController.list);
 router.post('/add', LocationController.addLocation);
-
+router.post('/saveExitTime', LocationController.saveExit);
 
 module.exports = router;

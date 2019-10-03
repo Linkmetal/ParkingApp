@@ -24,4 +24,8 @@ export class LocationService {
   add(coords: ParkingLocation, username: string): Observable<any> {
     return this.http.post(`${environment.server}/locations/add`, {coords, username} );
   }
+
+  setExitTime(id: string, time: number) {
+    return this.http.post(`${environment.server}/locations/saveExitTime`, {id, time} );
+  }
 }

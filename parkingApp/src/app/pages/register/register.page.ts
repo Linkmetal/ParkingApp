@@ -20,7 +20,7 @@ export class RegisterPage implements OnInit {
     options: null,
     fields: null
   }
-  
+
 
   constructor(
     private loginService: LoginService,
