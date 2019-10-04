@@ -2,11 +2,11 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable} from 'rxjs';
 import { User } from '../typings/user';
+import { environment } from '../../environments/environment';
 @Injectable({
   providedIn: 'root'
 })
 export class ProfileService {
-  serverUrl: 'https://parkingmvc.azurewebsites.net/api/';
   profile: any;
 
   constructor(private http: HttpClient) { }
@@ -15,14 +15,14 @@ export class ProfileService {
   .set('Content-Type', 'application/json');
 
   get(username: string): Observable<any> {
-    return this.http.get(`https://parkingmvc.azurewebsites.net/api/Users?username=${username}`, {headers: this.headers} );
+    return this.http.get(`${environment.profileServer}/Users?username=${username}`, {headers: this.headers} );
   }
 
   set(user: User, username: string): Observable<any> {
-    return this.http.put(`https://parkingmvc.azurewebsites.net/api/Users/${user.id}`, {user} );
+    return this.http.put(`${environment.profileServer}/Users/${user.id}`, {user} );
   }
 
   add(user: User): Observable<any> {
-    return this.http.post(`https://parkingmvc.azurewebsites.net/api/Users/add`, {user} );
+    return this.http.post(`´${environment.profileServer}/Users/add`, {user} );
   }
 }

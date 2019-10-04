@@ -7,6 +7,7 @@ import { ParkingLocation } from 'src/app/typings/location';
 import { NativeStorage } from '@ionic-native/native-storage/ngx';
 import { ToastService } from 'src/app/services/toast.service';
 import { LoginService } from 'src/app/services/login.service';
+import { MenuController } from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
@@ -15,7 +16,13 @@ import { LoginService } from 'src/app/services/login.service';
 })
 export class HomePage implements OnInit{
 
-  constructor(private router:Router, private profileService: ProfileService, private nativeStorage: NativeStorage, private toastService: ToastService) {}
+  constructor(
+      private router:Router, 
+      private profileService: ProfileService, 
+      private nativeStorage: NativeStorage,
+      private toastService: ToastService,
+      private menuController: MenuController
+    ){}
 
   profile: User;
   actualLocation: ParkingLocation;
@@ -24,19 +31,22 @@ export class HomePage implements OnInit{
   parkedAt: string;
 
   ngOnInit(): void {
-    this.nativeStorage.getItem('user').then( res => this.username = res.username)
-    this.profileService.get(this.username).subscribe( (res) => {
-      this.profileService.profile = res[0];
-      console.log(res);
-      this.profile = this.profileService.profile;
-      this.nativeStorage.getItem('location').then(res => this.actualLocation = res);
-      console.log(this.actualLocation);
-      if(this.actualLocation !== undefined) {
-        this.parkedAt = new Date(this.actualLocation.timestamp.in).toLocaleString();
-      }
-      this.loading = false;
-    }, (err) => {
-      this.toastService.create(`Error getting profile info: ${err.message}`);
+    this.menuController.enable(true);
+    this.nativeStorage.getItem('user').then( res => {
+      this.username = res.username;
+      this.profileService.get(this.username).subscribe( (res) => {
+        this.profileService.profile = res[0];
+        console.log(res);
+        this.profile = this.profileService.profile;
+        this.nativeStorage.getItem('location').then(res => this.actualLocation = res);
+        console.log(this.actualLocation);
+        if(this.actualLocation !== undefined) {
+          this.parkedAt = new Date(this.actualLocation.timestamp.in).toLocaleString();
+        }
+        this.loading = false;
+      }, (err) => {
+        this.toastService.create(`Error getting profile info: ${err.message}`);
+      });
     });
   }
 

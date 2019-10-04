@@ -11,7 +11,7 @@ import { AppRoutingModule } from './app-routing.module';
 import {FormlyModule} from '@ngx-formly/core';
 import {FormlyIonicModule} from '@ngx-formly/ionic'
 import { LoginService } from './services/login.service';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpInterceptorService } from './services/http-interceptor.service';
 import { ObjectTypeComponent } from './typings/formly/object.type';
 import { FormlyFieldFile } from './typings/formly/file.type';
@@ -71,12 +71,12 @@ import { NativeStorage } from '@ionic-native/native-storage/ngx';
   providers: [
     StatusBar,
     SplashScreen,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     LoginService,
-    // HttpInterceptorService,
     Geolocation,
     BluetoothLE,
-    NativeStorage
+    NativeStorage,
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    { provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorService, multi: true }
   ],
   bootstrap: [AppComponent]
 })

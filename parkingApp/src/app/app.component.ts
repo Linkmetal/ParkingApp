@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 
-import { Platform } from '@ionic/angular';
+import { Platform, MenuController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { LoginService } from './services/login.service';
@@ -19,14 +19,14 @@ export class AppComponent {
       icon: 'home'
     },
     {
-      title: 'List',
+      title: 'Parking list',
       url: '/list',
       icon: 'list'
     },
     {
-      title: 'Login',
+      title: 'Logout',
       url: '/login',
-      icon: 'login'
+      icon: 'exit'
     }
   ];
 

@@ -11,6 +11,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NativeStorage } from '@ionic-native/native-storage/ngx';
 import { ProfileService } from 'src/app/services/profile.service';
 import { ToastService } from 'src/app/services/toast.service';
+import { MenuController } from '@ionic/angular';
 
 
 
@@ -39,10 +40,12 @@ export class LoginPage implements OnInit {
     private router: Router,
     private nativeStorage: NativeStorage,
     private profileService: ProfileService,
-    private toastService: ToastService
+    private toastService: ToastService,
+    private menuController: MenuController
     ) { }
 
     ngOnInit() {
+      this.menuController.enable(false);
       this.nativeStorage.getItem('user').then( (res) => {
         this.user = res;
         this.loadForm('login.schema');
@@ -50,6 +53,10 @@ export class LoginPage implements OnInit {
         console.log(err);
         this.loadForm('login.schema');
       });
+  }
+
+  ionViewWillEnter() {
+    this.menuController.enable(false);
   }
 
 
