@@ -51,7 +51,7 @@ export class GoogleMapComponent implements OnInit {
   loadMap() {
     this.nativeStorage.getItem('user').then( res => this.username = res.username );
     this.geolocation.getCurrentPosition().then( (res) => {
-      let mapOptions: GoogleMapOptions = {
+      const mapOptions: GoogleMapOptions = {
         camera: {
            target: {
              lat: res.coords.latitude,
@@ -82,7 +82,7 @@ export class GoogleMapComponent implements OnInit {
 
   saveCoords() {
     this.geolocation.getCurrentPosition().then( (res) => {
-      let date = Date.now();
+      const date = Date.now();
       let location: ParkingLocation = {
         username: this.username,
         timestamp: {

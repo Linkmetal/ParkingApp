@@ -24,7 +24,7 @@ export class HomePage implements OnInit{
   parkedAt: string;
 
   ngOnInit(): void {
-    this.nativeStorage.getItem("user").then( res => this.username = res.username)
+    this.nativeStorage.getItem('user').then( res => this.username = res.username)
     this.profileService.get(this.username).subscribe( (res) => {
       this.profileService.profile = res[0];
       console.log(res);
@@ -49,8 +49,7 @@ export class HomePage implements OnInit{
     console.log(this.actualLocation);
     if(e !== null) {
       this.parkedAt = new Date(this.actualLocation.timestamp.in).toLocaleString();
-    }
-    else {
+    } else {
       this.parkedAt = '';
     }
   }
