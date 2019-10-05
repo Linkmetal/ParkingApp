@@ -15,14 +15,14 @@ export class ProfileService {
   .set('Content-Type', 'application/json');
 
   get(username: string): Observable<any> {
-    return this.http.get(`${environment.profileServer}/Users?username=${username}`, {headers: this.headers} );
+    return this.http.get(`${environment.profileServer}/Users/username?username=${username}`, {headers: this.headers} );
   }
 
-  set(user: User, username: string): Observable<any> {
-    return this.http.put(`${environment.profileServer}/Users/${user.id}`, {user} );
+  set(user: User): Observable<any> {
+    return this.http.put(`${environment.profileServer}/Users/${user.id}`, user, {headers: this.headers} );
   }
 
   add(user: User): Observable<any> {
-    return this.http.post(`´${environment.profileServer}/Users/add`, {user} );
+    return this.http.post(`${environment.profileServer}/Users`, user, {headers: this.headers} );
   }
 }

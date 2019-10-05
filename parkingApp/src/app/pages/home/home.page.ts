@@ -35,17 +35,20 @@ export class HomePage implements OnInit{
     this.nativeStorage.getItem('user').then( res => {
       this.username = res.username;
       this.profileService.get(this.username).subscribe( (res) => {
-        this.profileService.profile = res[0];
+        this.profileService.profile = res;
         console.log(res);
         this.profile = this.profileService.profile;
-        this.nativeStorage.getItem('location').then(res => this.actualLocation = res);
-        console.log(this.actualLocation);
-        if(this.actualLocation !== undefined) {
-          this.parkedAt = new Date(this.actualLocation.timestamp.in).toLocaleString();
-        }
-        this.loading = false;
-      }, (err) => {
-        this.toastService.create(`Error getting profile info: ${err.message}`);
+        this.nativeStorage.setItem('profile', res);
+        this.nativeStorage.getItem('location').then(res => {
+          this.actualLocation = res;
+          console.log(this.actualLocation);
+          if(this.actualLocation !== undefined && this.actualLocation !== null) {
+            this.parkedAt = new Date(this.actualLocation.timestamp.in).toLocaleString();
+          }
+          this.loading = false;
+        }, (err) => {
+          this.toastService.create(`Error getting profile info: ${err.message}`);
+        });
       });
     });
   }

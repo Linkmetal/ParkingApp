@@ -1,14 +1,43 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
+      <ion-back-button>
+      </ion-back-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button (click)="editting = !editting; editIcon = editIcon === 'create' ? 'arrow-round-back': 'create'">
+        <ion-icon slot="icon-only" [name]="editIcon"></ion-icon>
+      </ion-button>
     </ion-buttons>
     <ion-title>Your profile</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <div class="content">
+  <ion-item-group *ngIf="!editting && loaded">
+    <ion-item>
+      <ion-label>Username</ion-label> {{profile.username}}
+    </ion-item>
+    <ion-item>
+      <ion-label>Name</ion-label> {{profile.name}}
+    </ion-item>
+    <ion-item>
+      <ion-label>Surename</ion-label> {{profile.surename}}
+    </ion-item>
+    <ion-item>
+      <ion-label>Email</ion-label> {{profile.email}}
+    </ion-item>
+    <ion-item>
+      <ion-label>Phone number</ion-label> {{profile.phone}}
+    </ion-item>
+    <ion-item>
+      <ion-label>Car model</ion-label> {{profile.model}}
+    </ion-item>
+    <ion-item>
+      <ion-label>License plate</ion-label> {{profile.licensePlate}}
+    </ion-item>
+  </ion-item-group>
+  <div class="content" *ngIf="editting">
     <form [formGroup]="formlyObj.form" (ngSubmit)="update(formlyObj.model)" *ngIf="formlyObj.fields">
       <formly-form [form]="formlyObj.form" [fields]="formlyObj.fields" [model]="formlyObj.model"></formly-form>
       <div class="buttons">

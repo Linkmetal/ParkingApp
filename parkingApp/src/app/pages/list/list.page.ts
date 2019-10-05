@@ -3,7 +3,6 @@ import { ParkingLocation } from 'src/app/typings/location';
 import { LocationService } from 'src/app/services/location.service';
 import { ToastService } from 'src/app/services/toast.service';
 import { NativeStorage } from '@ionic-native/native-storage/ngx';
-import { Router } from '@angular/router';
 import { GoogleMap, Marker, MarkerIcon, GoogleMaps, GoogleMapOptions } from '@ionic-native/google-maps';
 
 @Component({
@@ -26,9 +25,11 @@ export class ListPage implements OnInit {
     }
   };
 
-  constructor(private locationService: LocationService, private toastService: ToastService, private nativeStorage: NativeStorage, private router: Router) {
-    
-  }
+  constructor(
+    private locationService: LocationService,
+    private toastService: ToastService,
+    private nativeStorage: NativeStorage,
+  ) {}
 
   ngOnInit() {
     let username = '';
@@ -37,6 +38,7 @@ export class ListPage implements OnInit {
       console.log(username);
       this.locationService.list(username).subscribe( res => {
         this.locations = res.result;
+        this.locations = this.locations.reverse();
         console.log(this.locations)
       }, err => {
         this.toastService.create(`Error getting the locations history: ${err.message}`);

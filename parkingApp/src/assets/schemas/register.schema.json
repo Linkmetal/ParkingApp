@@ -43,10 +43,6 @@
             "licensePlate": {
                 "type": "string",
                 "title": "License Plate"
-            },
-            "image": {
-                "type": "file",
-                "title": "Profile picture"
             }
             
         }
@@ -59,7 +55,6 @@
         "email": "",
         "phone": "",
         "model": "",
-        "licensePlate": "",
-        "image": ""
+        "licensePlate": ""
     }
 }

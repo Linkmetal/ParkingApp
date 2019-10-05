@@ -15,6 +15,4 @@ export interface User {
     model?: string;
     licensePlate?: string;
     image?: string;
-    
 }
-  
