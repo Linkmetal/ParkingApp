@@ -7,6 +7,7 @@ import { RouterModule } from '@angular/router';
 import { HomePage } from './home.page';
 import { GoogleMapComponent } from 'src/app/shared/components/google-map/google-map.component';
 import { GoogleMaps } from '@ionic-native/google-maps'
+import { TranslateModule } from '@ngx-translate/core';
 @NgModule({
   imports: [
     CommonModule,
@@ -17,7 +18,8 @@ import { GoogleMaps } from '@ionic-native/google-maps'
         path: '',
         component: HomePage
       }
-    ])
+    ]),
+    TranslateModule.forChild()
     
   ],
   declarations: [HomePage, GoogleMapComponent],

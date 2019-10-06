@@ -8,6 +8,7 @@ import { IonicModule } from '@ionic/angular';
 import { ProfilePage } from './profile.page';
 import { FormlyModule } from '@ngx-formly/core';
 import { FormlyIonicModule } from '@ngx-formly/ionic';
+import { TranslateModule } from '@ngx-translate/core';
 
 const routes: Routes = [
   {
@@ -25,6 +26,7 @@ const routes: Routes = [
     ReactiveFormsModule,
     FormlyModule,
     FormlyIonicModule,
+    TranslateModule
   ],
   declarations: [ProfilePage]
 })

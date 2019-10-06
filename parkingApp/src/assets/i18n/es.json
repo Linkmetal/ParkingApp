@@ -1,0 +1,27 @@
+{
+    "username":"usuario",
+    "password": "contraeña",
+    "Username":"Usuario",
+    "Password": "Contraeña",
+    "submit":"enviar",
+    "remember": "recuérdame",
+    "login": "iniciar sesión",
+    "register": "registrarse",
+    "Name": "Nombre",
+    "Surename": "Apellidos",
+    "Email": "Correo electrónico",
+    "PhoneNumber": "Nº de teléfono",
+    "CarModel": "Modelo de coche",
+    "LicensePlate": "Matrícula",
+    "home": "inicio",
+    "ParkedAt": "Aparcado a las:",
+    "SaveCoords": "Guardar coordenadas",
+    "SaveExit": "Guardar salida",
+    "ParkingHistory": "Historial de aparcamientos",
+    "duration": "duración:",
+    "back": "Atrás",
+    "date": "Fecha:",
+    "YourProfile": "Tu perfil",
+    "Logout": "Desconectarse"
+
+}

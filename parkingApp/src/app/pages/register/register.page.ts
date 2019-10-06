@@ -9,6 +9,8 @@ import { FormlyJsonschema } from '@ngx-formly/core/json-schema';
 import { ProfileService } from 'src/app/services/profile.service';
 import { ToastService } from 'src/app/services/toast.service';
 import { MenuController } from '@ionic/angular';
+import { TranslateService } from '@ngx-translate/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -31,7 +33,9 @@ export class RegisterPage implements OnInit {
     private formlyJsonschema: FormlyJsonschema,
     private profileService: ProfileService,
     private toastService: ToastService,
-    private menuController: MenuController
+    private menuController: MenuController,
+    private translateService: TranslateService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -42,6 +46,9 @@ export class RegisterPage implements OnInit {
         this.formlyObj.options = {};
         this.formlyObj.fields = [this.formlyJsonschema.toFieldConfig(schema)];
         this.formlyObj.fields[0].fieldGroup[1].templateOptions.type = 'password';
+        this.formlyObj.fields[0].fieldGroup.forEach(el => {
+          el.expressionProperties = {'templateOptions.label': this.translateService.stream(el.templateOptions.label)};
+        });
         this.formlyObj.model = model;
       })).subscribe();
   }
@@ -51,6 +58,7 @@ export class RegisterPage implements OnInit {
       // this.toastService.create(`User created correctly.`);
       this.profileService.add(model).subscribe( (res) => {
         this.toastService.create(`User created.`);
+        this.router.navigateByUrl('/login');
       }, (err) => {
         this.toastService.create(`Error creating the user: ${err.message}`);
       });

@@ -13,6 +13,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormlyIonicModule } from '@ngx-formly/ionic';
 
 import { FormlyModule } from '@ngx-formly/core';
+import { TranslateModule } from '@ngx-translate/core';
 const routes: Routes = [
   {
     path: '',
@@ -29,7 +30,9 @@ const routes: Routes = [
     ReactiveFormsModule,
     FormlyModule,
     FormlyIonicModule,
-    HttpClientModule
+    HttpClientModule,
+    TranslateModule.forChild(),
+    
   ],
   declarations: [LoginPage]
 })

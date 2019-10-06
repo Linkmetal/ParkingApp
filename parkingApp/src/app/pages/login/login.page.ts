@@ -5,13 +5,14 @@ import {FormlyFieldConfig} from '@ngx-formly/core';
 import { FormlyFormOptions } from '@ngx-formly/core';
 import { FormlyJsonschema } from '@ngx-formly/core/json-schema';
 import { HttpClient } from '@angular/common/http';
-import { tap } from 'rxjs/operators'
+import { tap } from 'rxjs/operators';
 import { LoginService } from './../../services/login.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { NativeStorage } from '@ionic-native/native-storage/ngx';
-import { ProfileService } from 'src/app/services/profile.service';
 import { ToastService } from 'src/app/services/toast.service';
 import { MenuController } from '@ionic/angular';
+import { TranslateService } from '@ngx-translate/core';
+import { environment } from 'src/environments/environment';
 
 
 
@@ -39,20 +40,24 @@ export class LoginPage implements OnInit {
     private http: HttpClient,
     private router: Router,
     private nativeStorage: NativeStorage,
-    private profileService: ProfileService,
     private toastService: ToastService,
-    private menuController: MenuController
-    ) { }
+    private menuController: MenuController,
+    private translateService: TranslateService
+    ) {
+      translateService.addLangs(['en', 'es']);
+      translateService.setDefaultLang(environment.language);
+      translateService.use(environment.language);
+     }
 
-    ngOnInit() {
-      this.menuController.enable(false);
-      this.nativeStorage.getItem('user').then( (res) => {
-        this.user = res;
-        this.loadForm('login.schema');
-      }, (err) => {
-        console.log(err);
-        this.loadForm('login.schema');
-      });
+  ngOnInit() {
+    this.menuController.enable(false);
+    this.nativeStorage.getItem('user').then( (res) => {
+      this.user = res;
+      this.loadForm('login.schema');
+    }, (err) => {
+      console.log(err);
+      this.loadForm('login.schema');
+    });
   }
 
   ionViewWillEnter() {
@@ -70,10 +75,8 @@ export class LoginPage implements OnInit {
           await this.nativeStorage.setItem('token', res.token);
         }
         this.loginService.user = model;
-        
+
           this.router.navigateByUrl('/home')
-        
-        // this.router.navigateByUrl('/home');
 
       }
     }, (err) => {
@@ -89,10 +92,13 @@ export class LoginPage implements OnInit {
         this.options = {};
         this.fields = [this.formlyJsonschema.toFieldConfig(schema)];
         this.fields[0].fieldGroup[1].templateOptions.type = 'password';
+        this.fields[0].fieldGroup.forEach(el => {
+          el.expressionProperties = {'templateOptions.label': this.translateService.stream(el.templateOptions.label)};
+        });
+        console.log(this.fields)
         if(this.user.username !== null) {
           this.model = this.user;
-        }
-        else {
+        } else {
           this.model = model;
         }
       }),

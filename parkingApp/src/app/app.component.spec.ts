@@ -1,12 +1,14 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { TestBed, async } from '@angular/core/testing';
 
-import { Platform } from '@ionic/angular';
+import { Platform, IonRouterOutlet } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { RouterTestingModule } from '@angular/router/testing';
 
 import { AppComponent } from './app.component';
+import { Router } from '@angular/router';
+import { By } from '@angular/platform-browser';
 
 describe('AppComponent', () => {
 
@@ -64,4 +66,11 @@ describe('AppComponent', () => {
     expect(menuItems[1].getAttribute('ng-reflect-router-link')).toEqual('/list');
   });
 
+  it('Should have router-outlet', () => {
+    const fixture = TestBed.createComponent(AppComponent);
+
+    const elem = fixture.debugElement.query(By.css( 'IonRouterOutlet' ));
+
+    expect( elem ).not.toBeNull();
+  });
 });

@@ -9,32 +9,32 @@
         <ion-icon slot="icon-only" [name]="editIcon"></ion-icon>
       </ion-button>
     </ion-buttons>
-    <ion-title>Your profile</ion-title>
+    <ion-title translate>YourProfile</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <ion-item-group *ngIf="!editting && loaded">
     <ion-item>
-      <ion-label>Username</ion-label> {{profile.username}}
+      <ion-label translate text>Username</ion-label> {{profile.username}}
     </ion-item>
     <ion-item>
-      <ion-label>Name</ion-label> {{profile.name}}
+      <ion-label translate text>Name</ion-label> {{profile.name}}
     </ion-item>
     <ion-item>
-      <ion-label>Surename</ion-label> {{profile.surename}}
+      <ion-label translate text>Surename</ion-label> {{profile.surename}}
     </ion-item>
     <ion-item>
-      <ion-label>Email</ion-label> {{profile.email}}
+      <ion-label translate text>Email</ion-label> {{profile.email}}
     </ion-item>
     <ion-item>
-      <ion-label>Phone number</ion-label> {{profile.phone}}
+      <ion-label translate text>PhoneNumber</ion-label> {{profile.phone}}
     </ion-item>
     <ion-item>
-      <ion-label>Car model</ion-label> {{profile.model}}
+      <ion-label translate text>CarModel</ion-label> {{profile.model}}
     </ion-item>
     <ion-item>
-      <ion-label>License plate</ion-label> {{profile.licensePlate}}
+      <ion-label translate text>LicensePlate</ion-label> {{profile.licensePlate}}
     </ion-item>
   </ion-item-group>
   <div class="content" *ngIf="editting">

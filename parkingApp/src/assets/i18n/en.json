@@ -1,0 +1,33 @@
+{
+    "username":"username",
+    "password": "password",
+    "Username":"Username",
+    "Password": "Password",
+    "submit":"submit",
+    "remember": "remember",
+    "login": "iniciar sesión",
+    "register": "registrarse",
+    "Name": "Name",
+    "Surename": "Surename",
+    "Email": "Email",
+    "PhoneNumber": "Phone number",
+    "CarModel": "Car model",
+    "LicensePlate": "License Plate",
+    "home": "home",
+    "ParkedAt": "Parked at:",
+    "SaveCoords": "Save Coords",
+    "SaveExit": "Save exit",
+    "ParkingHistory": "Parking History",
+    "duration": "duration:",
+    "back": "back",
+    "date": "Date:",
+    "YourProfile": "Your profile",
+    "Logout": "Log out"
+
+
+
+
+
+
+
+}

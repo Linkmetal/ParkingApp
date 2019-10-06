@@ -9,6 +9,7 @@ import { RegisterPage } from './register.page';
 
 import { FormlyModule } from '@ngx-formly/core';
 import { FormlyIonicModule } from '@ngx-formly/ionic';
+import { TranslateModule } from '@ngx-translate/core';
 
 const routes: Routes = [
   {
@@ -26,6 +27,7 @@ const routes: Routes = [
     ReactiveFormsModule,
     FormlyModule,
     FormlyIonicModule,
+    TranslateModule
   ],
   declarations: [RegisterPage]
 })
