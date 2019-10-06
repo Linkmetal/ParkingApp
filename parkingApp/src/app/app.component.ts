@@ -27,7 +27,7 @@ export class AppComponent {
     },
     {
       title: 'YourProfile',
-      url: '/list',
+      url: '/profile',
       icon: 'contact'
     },
     {

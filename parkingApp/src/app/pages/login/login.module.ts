@@ -31,8 +31,7 @@ const routes: Routes = [
     FormlyModule,
     FormlyIonicModule,
     HttpClientModule,
-    TranslateModule.forChild(),
-    
+    TranslateModule.forChild()
   ],
   declarations: [LoginPage]
 })
