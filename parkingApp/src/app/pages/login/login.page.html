@@ -8,10 +8,15 @@
   <div class="content">
     <form [formGroup]="form" (ngSubmit)="login(model)" *ngIf="fields">
       <formly-form [form]="form" [fields]="fields" [model]="model"></formly-form>
-      <ion-item lines="none" >
-        <ion-label text-capitalize translate>remember</ion-label>
-        <ion-checkbox (ionChange)="remember = !remember" checked="true" name="remember"></ion-checkbox>
-      </ion-item>
+      
+          <ion-item slot="start"><ion-label text-capitalize translate>remember</ion-label>
+        <ion-checkbox (ionChange)="remember = !remember" checked="true" name="remember"></ion-checkbox></ion-item>
+     
+      <ion-select (ionChange)="changeLanguague($event)" value="es" placeholder="Select One">
+        <ion-select-option value="es">Español</ion-select-option>
+        <ion-select-option value="en">English</ion-select-option>
+      </ion-select>
+      
       <div class="buttons">
         <ion-button type="submit" color="primary" size="large" margin-top text-capitalize translate>login</ion-button>
         <ion-button routerLink="/register" color="secondary" size="large" margin-top text-capitalize translate>register</ion-button>

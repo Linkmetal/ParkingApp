@@ -104,4 +104,11 @@ export class LoginPage implements OnInit {
       }),
     ).subscribe();
   }
+
+  changeLanguague(e) {
+    console.log(e);
+    this.translateService.setDefaultLang(e.detail.value);
+    this.translateService.use(e.detail.value)
+
+  }
 }

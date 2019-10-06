@@ -15,7 +15,6 @@ import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common
 import { HttpInterceptorService } from './services/http-interceptor.service';
 import { ObjectTypeComponent } from './typings/formly/object.type';
 import { FormlyFieldFile } from './typings/formly/file.type';
-import { FileValueAccessor } from './typings/formly/file-value-accessor';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { NativeStorage } from '@ionic-native/native-storage/ngx';
@@ -29,7 +28,6 @@ export const createTranslateLoader = (http: HttpClient) => new TranslateHttpLoad
   declarations: [
     AppComponent,
     ObjectTypeComponent,
-    FileValueAccessor,
     FormlyFieldFile,
 
   ],
@@ -65,7 +63,6 @@ export const createTranslateLoader = (http: HttpClient) => new TranslateHttpLoad
           },
         },
         { name: 'object', component: ObjectTypeComponent },
-        { name: 'file', component: FormlyFieldFile, wrappers: ['form-field'] },
       ],
     }),
     FormlyIonicModule,
