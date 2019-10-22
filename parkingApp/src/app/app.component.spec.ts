@@ -7,6 +7,18 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { RouterTestingModule } from '@angular/router/testing';
 
 import { AppComponent } from './app.component';
+import { Router } from '@angular/router';
+import { By } from '@angular/platform-browser';
+import { HttpClient } from '@angular/common/http';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { HttpClientModule } from '@angular/common/http';
+import { FormlyIonicModule } from '@ngx-formly/ionic';
+import { FormlyFieldFile } from './typings/formly/file.type';
+import { ObjectTypeComponent } from './typings/formly/object.type';
+import { FormlyModule } from '@ngx-formly/core';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+export const createTranslateLoader = (http: HttpClient) => new TranslateHttpLoader(http, '../assets/i18n/', '.json');
 
 describe('AppComponent', () => {
 
@@ -26,7 +38,20 @@ describe('AppComponent', () => {
         { provide: SplashScreen, useValue: splashScreenSpy },
         { provide: Platform, useValue: platformSpy },
       ],
-      imports: [ RouterTestingModule.withRoutes([])],
+      imports: [ RouterTestingModule.withRoutes([]),
+      FormsModule,
+      ReactiveFormsModule,
+      FormlyModule.forRoot(),
+      FormlyIonicModule,
+      HttpClientModule,
+      TranslateModule.forRoot({
+        loader: {
+          provide: TranslateLoader,
+          useFactory: (createTranslateLoader),
+          deps: [HttpClient]
+        }
+      })
+    ],
     }).compileComponents();
   }));
 
@@ -49,9 +74,12 @@ describe('AppComponent', () => {
     await fixture.detectChanges();
     const app = fixture.nativeElement;
     const menuItems = app.querySelectorAll('ion-label');
-    expect(menuItems.length).toEqual(2);
-    expect(menuItems[0].textContent).toContain('Home');
-    expect(menuItems[1].textContent).toContain('List');
+    expect(menuItems.length).toEqual(4);
+    expect(menuItems[0].textContent).toContain('home');
+    expect(menuItems[1].textContent).toContain('ParkingHistory');
+    expect(menuItems[2].textContent).toContain('YourProfile');
+    expect(menuItems[3].textContent).toContain('Logout');
+
   });
 
   it('should have urls', async () => {
@@ -59,9 +87,19 @@ describe('AppComponent', () => {
     await fixture.detectChanges();
     const app = fixture.nativeElement;
     const menuItems = app.querySelectorAll('ion-item');
-    expect(menuItems.length).toEqual(2);
+    expect(menuItems.length).toEqual(4);
     expect(menuItems[0].getAttribute('ng-reflect-router-link')).toEqual('/home');
     expect(menuItems[1].getAttribute('ng-reflect-router-link')).toEqual('/list');
+    expect(menuItems[2].getAttribute('ng-reflect-router-link')).toEqual('/profile');
+    expect(menuItems[3].getAttribute('ng-reflect-router-link')).toEqual('/login');
+
   });
 
+  it('Should have router-outlet', () => {
+    const fixture = TestBed.createComponent(AppComponent);
+
+    const elem = fixture.debugElement.query(By.css( 'ion-router-outlet' ));
+
+    expect( elem ).not.toBeNull();
+  });
 });

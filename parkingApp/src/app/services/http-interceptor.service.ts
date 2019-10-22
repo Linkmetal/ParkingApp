@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { LoginService } from './login.service';
 import { environment } from '../../environments/environment';
+import { NativeStorage } from '@ionic-native/native-storage/ngx';
 
 
 
@@ -11,22 +12,20 @@ import { environment } from '../../environments/environment';
 })
 export class HttpInterceptorService implements HttpInterceptor {
 
-  private headers: object = {
-    'Content-Type': 'application/json',
-  };
+  public token = '';
 
-  constructor(private loginService: LoginService) { }
+  constructor(private nativeStorage: NativeStorage) {
+    this.nativeStorage.getItem('token').then( res => this.token = res);
+   }
 
-  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    console.log('interceptor');
-    if (this.loginService.token) {
-      req = req.clone({ headers: req.headers.set('x-token', this.loginService.token) });
+  intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    if(!request.url.includes('login') || !request.url.includes('register')) {
+      request = request.clone({
+        setHeaders: {
+          Authorization: `Bearer ${this.token}`
+        }
+      });
     }
-    Object.keys(this.headers).forEach(e => {
-      req = req.clone({ headers: req.headers.set(e, this.headers[e]) });
-    });
-    console.log(req);
-
-    return next.handle(req);
+    return next.handle(request);
   }
 }

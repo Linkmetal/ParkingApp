@@ -1,5 +1,10 @@
 export interface ParkingLocation {
-    timeStamp: number;
+    _id?: string,
+    username: string,
+    timestamp: {
+        in: number,
+        out: number,
+    };
     coords: {
         lat: number,
         long: number

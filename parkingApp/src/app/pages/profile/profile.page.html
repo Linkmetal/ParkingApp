@@ -1,14 +1,42 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
+        <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>Your profile</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="editting = !editting; editIcon = editIcon === 'create' ? 'arrow-round-back': 'create'">
+        <ion-icon slot="icon-only" [name]="editIcon"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title translate>YourProfile</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <div class="content">
+  <ion-item-group *ngIf="!editting && loaded">
+    <ion-item>
+      <ion-label translate text>Username</ion-label> {{profile.username}}
+    </ion-item>
+    <ion-item>
+      <ion-label translate text>Name</ion-label> {{profile.name}}
+    </ion-item>
+    <ion-item>
+      <ion-label translate text>Surename</ion-label> {{profile.surename}}
+    </ion-item>
+    <ion-item>
+      <ion-label translate text>Email</ion-label> {{profile.email}}
+    </ion-item>
+    <ion-item>
+      <ion-label translate text>PhoneNumber</ion-label> {{profile.phone}}
+    </ion-item>
+    <ion-item>
+      <ion-label translate text>CarModel</ion-label> {{profile.model}}
+    </ion-item>
+    <ion-item>
+      <ion-label translate text>LicensePlate</ion-label> {{profile.licensePlate}}
+    </ion-item>
+  </ion-item-group>
+  <div class="content" *ngIf="editting">
     <form [formGroup]="formlyObj.form" (ngSubmit)="update(formlyObj.model)" *ngIf="formlyObj.fields">
       <formly-form [form]="formlyObj.form" [fields]="formlyObj.fields" [model]="formlyObj.model"></formly-form>
       <div class="buttons">

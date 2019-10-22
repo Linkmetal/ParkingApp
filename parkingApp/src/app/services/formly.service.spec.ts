@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 
 import { FormlyService } from './formly.service';
 
-describe('FormlyService', () => {
+xdescribe('FormlyService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {

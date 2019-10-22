@@ -32,6 +32,8 @@
     "@ngx-formly/core": "^5.4.3",
     "@ngx-formly/ionic": "^5.4.3",
     "@ngx-formly/material": "^5.4.3",
+    "@ngx-translate/core": "^11.0.1",
+    "@ngx-translate/http-loader": "^4.0.0",
     "cordova-android": "8.1.0",
     "cordova-browser": "6.0.0",
     "cordova-plugin-ble-central": "^1.2.2",

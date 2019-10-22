@@ -1,0 +1,48 @@
+{
+    "schema": {
+        "type": "object",
+        "required": [
+            "username",
+            "name",
+            "surename",
+            "email",
+            "phone",
+            "model",
+            "licensePlate"
+        ],
+        "properties": {
+            "name": {
+                "type": "string",
+                "title": "Name"
+            },
+            "surename": {
+                "type": "string",
+                "title": "Surename"
+            },
+            "email": {
+                "type": "string",
+                "title": "Email"
+            },
+            "phone": {
+                "type": "string",
+                "title": "PhoneNumber"
+            },
+            "model": {
+                "type": "string",
+                "title": "CarModel"
+            },
+            "licensePlate": {
+                "type": "string",
+                "title": "LicensePlate"
+            } 
+        }
+    },
+    "model": {
+        "name": "",
+        "surename": "",
+        "email": "",
+        "phone": "",
+        "model": "",
+        "licensePlate": ""
+    }
+}

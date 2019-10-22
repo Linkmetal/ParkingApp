@@ -9,6 +9,8 @@ import { tap } from 'rxjs/operators';
 import { FormlyJsonschema } from '@ngx-formly/core/json-schema';
 import { ProfileService } from 'src/app/services/profile.service';
 import { ToastService } from 'src/app/services/toast.service';
+import { NativeStorage } from '@ionic-native/native-storage/ngx';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-profile',
@@ -16,8 +18,11 @@ import { ToastService } from 'src/app/services/toast.service';
   styleUrls: ['./profile.page.scss'],
 })
 export class ProfilePage implements OnInit {
-
-  formlyObj:FormlyObject = {
+  editting = false;
+  loaded = false;
+  profile: User;
+  editIcon = 'create';
+  formlyObj: FormlyObject = {
     form: null,
     model: null,
     options: null,
@@ -28,25 +33,31 @@ export class ProfilePage implements OnInit {
   constructor(
     private profileService: ProfileService,
     private formlyService: FormlyService,
-    private formlyJsonschema:FormlyJsonschema,
-    private loginService: LoginService,
-    private toastService: ToastService
+    private formlyJsonschema: FormlyJsonschema,
+    private toastService: ToastService,
+    private nativeStorage: NativeStorage,
+    private translateService: TranslateService
   ) { }
 
   ngOnInit() {
-    this.formlyService.loadSchema('register').pipe(
+    this.nativeStorage.getItem('profile').then( res => {
+      this.profile = res;
+      this.formlyService.loadSchema('profile').pipe(
       tap(({ schema, model }) => {
         this.formlyObj.form = new FormGroup({});
         this.formlyObj.options = {};
         this.formlyObj.fields = [this.formlyJsonschema.toFieldConfig(schema)];
-        this.formlyObj.fields[0].fieldGroup[1].templateOptions.type = 'password'
-        this.formlyObj.model = this.profileService.profile;
-        
+        this.formlyObj.fields[0].fieldGroup.forEach(el => {
+          el.expressionProperties = {'templateOptions.label': this.translateService.stream(el.templateOptions.label)};
+        });
+        this.formlyObj.model = this.profile || model;
+        this.loaded = true;
       })).subscribe();
+    });
   }
 
   update(model: User) {
-    this.profileService.set(model, this.loginService.user.username).subscribe( (res) => {
+    this.profileService.set(model).subscribe( (res) => {
       console.log(res);
       this.toastService.create('Saved!')
     }, (err) => {

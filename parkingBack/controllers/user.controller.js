@@ -50,9 +50,7 @@ async function addUser(req, res) {
   instance.save( await function (err) {
     if (err) return res.status(500).send(`Error creating the user: ${err}`);
 
-    
-      
-    return res.status(200).send('Saved!');
+    return res.status(200).send({message:'Saved!'});
   });
 }
 

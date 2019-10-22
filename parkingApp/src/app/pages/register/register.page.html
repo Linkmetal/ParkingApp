@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Register</ion-title>
+    <ion-title text-capitalize translate>register</ion-title>
       <ion-buttons slot="start">
         <ion-back-button></ion-back-button>
       </ion-buttons>
@@ -12,9 +12,8 @@
     <form [formGroup]="formlyObj.form" (ngSubmit)="register(formlyObj.model)" *ngIf="formlyObj.fields">
       <formly-form [form]="formlyObj.form" [fields]="formlyObj.fields" [model]="formlyObj.model"></formly-form>
       <div class="buttons">
-        <ion-button type="submit" color="primary" size="large" margin-top translate>Register</ion-button>
+        <ion-button type="submit" color="primary" size="large" margin-top text-capitalize translate>register</ion-button>
       </div>   
     </form>
-    
   </div>
 </ion-content>

@@ -3,7 +3,7 @@ import { IonicModule } from '@ionic/angular';
 
 import { ListPage } from './list.page';
 
-describe('ListPage', () => {
+xdescribe('ListPage', () => {
   let component: ListPage;
   let fixture: ComponentFixture<ListPage>;
   let listPage: HTMLElement;

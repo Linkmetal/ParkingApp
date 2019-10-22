@@ -3,25 +3,22 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>
-      List
+    <ion-title translate>
+      ParkingHistory
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-list>
-    <ion-item *ngFor="let item of items">
-      <ion-icon [name]="item.icon" slot="start"></ion-icon>
-      {{item.title}}
+    <div class="map" *ngIf="displayMap" id="map_canvas"></div>
+    <ion-button id="mapButton" *ngIf="displayMap" (click)="displayMap = false" color="primary" size="large" margin-top translate>back</ion-button>
+  <ion-list *ngIf="!displayMap">
+    <ion-item *ngFor="let item of locations; let i = index">
+        <ion-label translate text-capitalize>date <ion-label>{{getDate(item.timestamp)}}</ion-label></ion-label>
       <div class="item-note" slot="end">
-        {{item.note}}
+        <ion-label translate text-capitalize>duration</ion-label> {{getTimeElapsed(item.timestamp)}}
       </div>
+      <ion-icon (click)="loadMap(i)" name="eye" slot="end"></ion-icon>
     </ion-item>
   </ion-list>
-  <!--
-    <div *ngIf="selectedItem" padding>
-      You navigated here from <b>{{selectedItem.title }}</b>
-    </div>
-  -->
 </ion-content>

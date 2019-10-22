@@ -1,9 +1,8 @@
 <ion-content class="ion-padding">
-  <div id="map_canvas">
-  </div>
+  <div id="map_canvas"></div>
   <ion-progress-bar class="loadingBar" *ngIf="!map" type="indeterminate"></ion-progress-bar>
   <div class="buttons">
-      <ion-button (click)="saveCoords()" color="primary" size="large" margin-top translate>Save coords</ion-button>
-      <!-- <ion-button routerLink="/register" color="secondary" size="large" margin-top translate>Register</ion-button> -->
+      <ion-button *ngIf="!actualLocation" (click)="saveCoords()" color="primary" size="large" margin-top translate>SaveCoords</ion-button>
+      <ion-button *ngIf="actualLocation" (click)="saveExit()" color="primary" size="large" margin-top translate>SaveExit</ion-button>
     </div>   
 </ion-content>

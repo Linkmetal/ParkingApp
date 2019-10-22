@@ -34,19 +34,15 @@
             },
             "phone": {
                 "type": "string",
-                "title": "Phone number"
+                "title": "PhoneNumber"
             },
             "model": {
                 "type": "string",
-                "title": "Car model"
+                "title": "CarModel"
             },
             "licensePlate": {
                 "type": "string",
-                "title": "License Plate"
-            },
-            "image": {
-                "type": "file",
-                "title": "Profile picture"
+                "title": "LicensePlate"
             }
             
         }
@@ -59,7 +55,6 @@
         "email": "",
         "phone": "",
         "model": "",
-        "licensePlate": "",
-        "image": ""
+        "licensePlate": ""
     }
 }
